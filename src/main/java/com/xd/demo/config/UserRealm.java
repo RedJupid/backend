@@ -2,8 +2,12 @@ package com.xd.demo.config;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserRealm extends AuthorizingRealm {
 
@@ -15,7 +19,10 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        Set<String> roles = new HashSet<>();
+        roles.add("adminnn");
+        AuthorizationInfo info = new SimpleAuthorizationInfo(roles);
+        return info;
     }
 
     /**

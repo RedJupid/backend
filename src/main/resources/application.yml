@@ -9,3 +9,15 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+shiro:
+  anon:
+    - /login
+    - /swagger-ui.html
+    - /swagger/**
+    - /webjars/**
+    - /swagger-resources/**
+    - /v2/**
+    - /static/**
+  authc:
+    - /**
