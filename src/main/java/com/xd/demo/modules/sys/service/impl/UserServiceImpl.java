@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 * @since 2019-12-19
 */
 @Service
-    public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Override
+    public User selectByUsername(String username) {
+        return baseMapper.selectByUsername(username);
     }
+}

@@ -1,17 +1,26 @@
 package com.xd.demo.modules.sys.controller;
 
 import com.xd.demo.common.util.Result;
+import com.xd.demo.modules.sys.entity.User;
+import com.xd.demo.modules.sys.service.IUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
+    
+    @Autowired
+    IUserService userService;
+    
     @PostMapping("/login")
     public Result login(String username, String password){
         Subject subject = SecurityUtils.getSubject();
@@ -31,6 +40,25 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return Result.success("登出成功");
+    }
+
+    @PostMapping("/register")
+    public Result register(String username, String password){
+        User user = new User();
+        user.setUsername(username);
+        String hashAlgorithmName = "MD5";
+        Object credentials = password;
+//        Object salt = ByteSource.Util.bytes("test");
+        Object salt = null;
+        int hashIterations = 1024;
+        Object result = new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);
+        user.setPassword(result.toString());
+        boolean flag = userService.save(user);
+        if (flag){
+            return Result.success("注册成功");
+        }else{
+            return Result.error("注册失败");
+        }
     }
 
 }

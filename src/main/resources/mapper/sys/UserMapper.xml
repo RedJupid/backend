@@ -7,15 +7,25 @@
                 <result column="id" property="id" />
                     <result column="username" property="username" />
                     <result column="password" property="password" />
+                    <result column="status" property="status" />
                     <result column="create_time" property="createTime" />
                     <result column="update_time" property="updateTime" />
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-                id,
-            username, password, create_time, update_time
+                id, username, password, status, create_time, update_time
         </sql>
+
+    <select id="selectByUsername" resultType="com.xd.demo.modules.sys.entity.User">
+        select
+          id,
+          username,
+          password,
+          status
+        from sys_user
+        where username = #{username}
+    </select>
 
 
 </mapper>

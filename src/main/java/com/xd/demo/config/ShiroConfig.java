@@ -2,6 +2,8 @@ package com.xd.demo.config;
 
 import com.xd.demo.common.filter.UserLoginFilter;
 import com.xd.demo.common.properties.ShiroProperties;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -45,8 +47,22 @@ public class ShiroConfig {
     }
 
     @Bean
+    public EhCacheManager ehCacheManager(){
+//        System.out.println("ShiroConfiguration.getEhCacheManager()");
+        EhCacheManager cacheManager = new EhCacheManager();
+        //cacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
+        return cacheManager;
+    }
+
+
+    @Bean
     public UserRealm userRealm(){
-        return new UserRealm();
+        UserRealm userRealm = new UserRealm();
+        //设置缓存管理
+        userRealm.setCacheManager(ehCacheManager());
+        //设置密码匹配算法
+        userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return userRealm;
     }
 
     /**
@@ -69,6 +85,14 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+        credentialsMatcher.setHashAlgorithmName("MD5");
+        credentialsMatcher.setHashIterations(1024);
+        return credentialsMatcher;
     }
 
 }

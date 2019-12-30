@@ -13,6 +13,7 @@ spring:
 shiro:
   anon:
     - /login
+    - /register
     - /swagger-ui.html
     - /swagger/**
     - /webjars/**

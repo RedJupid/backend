@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @author xd
 * @since 2019-12-19
 */
-    public interface IUserService extends IService<User> {
-
-    }
+public interface IUserService extends IService<User> {
+    User selectByUsername(String username);
+}
