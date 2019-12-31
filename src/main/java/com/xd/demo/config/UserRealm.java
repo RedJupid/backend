@@ -1,5 +1,6 @@
 package com.xd.demo.config;
 
+import com.xd.demo.common.enumclass.UserStatusEnum;
 import com.xd.demo.modules.sys.entity.User;
 import com.xd.demo.modules.sys.service.IUserService;
 import org.apache.shiro.authc.*;
@@ -46,7 +47,7 @@ public class UserRealm extends AuthorizingRealm {
         if (user == null){
             throw new UnknownAccountException("用户不存在");
         }
-        if (user.getStatus()==0){
+        if (user.getStatus().equals(UserStatusEnum.UNUSABLE.getName())){
             throw new LockedAccountException("用户被锁定");
         }
         //1). principal:认证的实体信息，可以是username，也可以是数据表对应的用户的实体类对象
