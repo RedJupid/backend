@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xd.demo.modules.sys.mapper.MenuMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.xd.demo.modules.sys.entity.Menu">
+                <result column="id" property="id" />
+                    <result column="parent_id" property="parentId" />
+                    <result column="name" property="name" />
+                    <result column="url" property="url" />
+                    <result column="component" property="component" />
+                    <result column="perms" property="perms" />
+                    <result column="icon" property="icon" />
+                    <result column="order_num" property="orderNum" />
+                    <result column="create_time" property="createTime" />
+                    <result column="update_time" property="updateTime" />
+        </resultMap>
+    <resultMap id="MenuTreeMap" type="com.xd.demo.modules.sys.entity.MenuTree">
+        <result column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="url" property="url" />
+        <result column="component" property="component" />
+        <result column="perms" property="perms" />
+        <result column="icon" property="icon" />
+        <result column="order_num" property="orderNum" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+                id,
+            parent_id, name, url, component, perms, icon, order_num, create_time, update_time
+        </sql>
+
+    <select id="selectMenuTree" resultMap="MenuTreeMap">
+        select *
+        from sys_menu
+    </select>
+
+</mapper>

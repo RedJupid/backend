@@ -18,7 +18,7 @@ public class CodeGenerator {
 
     private static String author = "xd";
 
-    private static String packageName = "com.xd.demo";
+    private static String packageName = "com.xd.demo.modules";
 
     private static String url="jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai";
 

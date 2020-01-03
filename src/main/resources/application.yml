@@ -20,5 +20,10 @@ shiro:
     - /swagger-resources/**
     - /v2/**
     - /static/**
+    - /sys/**
   authc:
     - /**
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
