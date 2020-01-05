@@ -4,16 +4,17 @@
 
         <!-- 通用查询映射结果 -->
         <resultMap id="BaseResultMap" type="com.xd.demo.modules.sys.entity.Menu">
-                <result column="id" property="id" />
-                    <result column="parent_id" property="parentId" />
-                    <result column="name" property="name" />
-                    <result column="url" property="url" />
-                    <result column="component" property="component" />
-                    <result column="perms" property="perms" />
-                    <result column="icon" property="icon" />
-                    <result column="order_num" property="orderNum" />
-                    <result column="create_time" property="createTime" />
-                    <result column="update_time" property="updateTime" />
+            <result column="id" property="id" />
+            <result column="parent_id" property="parentId" />
+            <result column="name" property="name" />
+            <result column="url" property="url" />
+            <result column="component" property="component" />
+            <result column="perms" property="perms" />
+            <result column="icon" property="icon" />
+            <result column="order_num" property="orderNum" />
+            <result column="create_time" property="createTime" />
+            <result column="update_time" property="updateTime" />
+            <result column="type" property="type"/>
         </resultMap>
     <resultMap id="MenuTreeMap" type="com.xd.demo.modules.sys.entity.MenuTree">
         <result column="id" property="id" />
@@ -26,6 +27,7 @@
         <result column="order_num" property="orderNum" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="type" property="type"/>
     </resultMap>
 
         <!-- 通用查询结果列 -->
