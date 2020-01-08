@@ -1,6 +1,7 @@
 package com.xd.demo.common.controller;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xd.demo.common.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +23,12 @@ public class BaseController <T>{
     }
 
     @PostMapping
-    public String add(@RequestBody T o){
+    public Result add(@RequestBody T o){
         boolean flag = service.save(o);
         if (flag){
-            return "success";
+            return Result.success("新增成功");
         }else{
-            return "fail";
+            return Result.error("新增失败");
         }
     }
 
@@ -52,12 +53,12 @@ public class BaseController <T>{
     }
 
     @PutMapping
-    public String updateById(@RequestBody T o){
+    public Result updateById(@RequestBody T o){
         boolean flag = service.updateById(o);
         if (flag){
-            return "success";
+            return Result.success("更新成功");
         }else{
-            return "fail";
+            return Result.success("更新失败");
         }
     }
 }
